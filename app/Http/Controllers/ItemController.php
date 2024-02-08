@@ -8,6 +8,7 @@ use App\Models\Item;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
 
+
 class ItemController extends Controller
 {
     /**
@@ -24,7 +25,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Items/Create');
     }
 
     /**
@@ -32,7 +33,13 @@ class ItemController extends Controller
      */
     public function store(StoreItemRequest $request)
     {
-        //
+        DB::table('items')->insert([
+            'name' => $request->name,
+            'memo' => $request->memo,
+            'price' => $request->price
+        ]);
+        
+        return to_route('items.index');
     }
 
     /**
