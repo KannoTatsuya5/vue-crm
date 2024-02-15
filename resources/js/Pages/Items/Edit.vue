@@ -18,7 +18,13 @@ const form = reactive({
 })
 
 const updateItem = id => {
-    Inertia.put(route('items.update',{item: id}), form);
+    Inertia.put(route('items.update', { item: id }), form);
+}
+
+const deleteItem = id => {
+    Inertia.delete(route('items.destroy', { item: id }), {
+        onBefore: () => confirm('本当に削除しますか?')
+    });
 }
 </script>
 
@@ -64,15 +70,29 @@ const updateItem = id => {
                                         </div>
                                         <div class="p-2 w-full">
                                             <div class="relative">
-                                                <div class="text-red-600" v-if="errors.is_selling">{{ errors.is_selling }}</div>
-                                                <label for="is_selling" class="leading-7 text-sm text-gray-600">ステータス</label><br>
-                                                <input type="radio" id="is_selling" name="is_selling" v-model="form.is_selling" value="1">販売中
-                                                <input type="radio" id="is_selling" name="is_selling" v-model="form.is_selling" value="0">停止中
+                                                <div class="text-red-600" v-if="errors.is_selling">{{ errors.is_selling }}
+                                                </div>
+                                                <label for="is_selling"
+                                                    class="leading-7 text-sm text-gray-600">ステータス</label><br>
+                                                <input type="radio" id="is_selling" name="is_selling"
+                                                    v-model="form.is_selling" value="1">販売中
+                                                <input type="radio" id="is_selling" name="is_selling"
+                                                    v-model="form.is_selling" value="0">停止中
                                             </div>
                                         </div>
-                                        <div class="p-2 w-full">
-                                            <button type="submit"
-                                                class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">商品更新</button>
+                                        <div class="flex flex-auto">
+                                            <div class="p-2 w-full">
+                                                <button type="submit"
+                                                    class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                                                    更新する
+                                                </button>
+                                            </div>
+                                            <div class="p-2 w-full">
+                                                <button type="button" @click="deleteItem(item.id)"
+                                                    class="flex mx-auto text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg">
+                                                    削除する
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -81,6 +101,5 @@ const updateItem = id => {
                     </section>
                 </div>
             </div>
-        </div>
-    </AuthenticatedLayout>
-</template>
+    </div>
+</AuthenticatedLayout></template>

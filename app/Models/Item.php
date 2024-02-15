@@ -55,4 +55,14 @@ class Item extends Model
         ]);
     }
 
+    /**
+     * アイテムを削除する処理.
+     *
+     * @param [type] $id
+     * @return void
+     */
+    public function deleteItem($id) {
+        DB::table('items')->where('id',$id)->delete();
+    }
+
 }

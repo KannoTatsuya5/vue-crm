@@ -2,7 +2,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import { Link } from "@inertiajs/inertia-vue3";
-import FlashMessage from "@/Components/FlashMessage.vue";
 
 defineProps({
     item: Object,
@@ -25,7 +24,6 @@ defineProps({
                     <section class="text-gray-600 body-font relative">
                         <div class="container px-5 py-8 mx-auto">
                             <div class="lg:w-1/2 md:w-2/3 mx-auto">
-                                <FlashMessage></FlashMessage>
                                 <div class="flex flex-wrap -m-2">
                                     <div class="p-2 w-full">
                                         <div class="relative">
