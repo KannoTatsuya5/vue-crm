@@ -36,4 +36,23 @@ class Item extends Model
         ]);
     }
 
+    /**
+     * アイテムテーブルのデータを更新.
+     *
+     * @param [type] $id
+     * @param [type] $name
+     * @param [type] $memo
+     * @param [type] $price
+     * @param [type] $is_selling
+     * @return void
+     */
+    public function updateItem($id,$name,$memo,$price,$is_selling) {
+        DB::table('items')->where('id',$id)->update([
+            'name' => $name,
+            'memo' => $memo,
+            'price' => $price,
+            'is_selling' => $is_selling
+        ]);
+    }
+
 }

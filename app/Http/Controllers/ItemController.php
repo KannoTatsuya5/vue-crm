@@ -56,7 +56,9 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        //
+        return Inertia::render('Items/Edit', [
+            'item' => $item
+        ]);
     }
 
     /**
@@ -64,7 +66,15 @@ class ItemController extends Controller
      */
     public function update(UpdateItemRequest $request, Item $item)
     {
-        //
+        $id = $request->id;
+        $name = $request->name;
+        $memo = $request->memo;
+        $price = $request->price;
+        $is_selling = $request->is_selling;
+
+        $item->updateItem($id,$name,$memo,$price,$is_selling);
+
+        return to_route('items.index')->with(['success'=>'更新しました。']);
     }
 
     /**
