@@ -82,6 +82,7 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        //
+        $item->deleteItem($item->id);
+        return to_route('items.index')->with(['success' => '削除しました。']);
     }
 }
